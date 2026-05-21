@@ -37,7 +37,12 @@ class InspectionApp:
         self.page.title = "Windows 系统巡检工具"
         self.page.window_width = 550
         self.page.window_height = 900
-        self.page.window_resizable = True
+        self.page.window_min_width = 550
+        self.page.window_min_height = 900
+        self.page.window_max_width = 550
+        self.page.window_max_height = 900
+        self.page.window_resizable = False
+        self.page.update()
         self.page.theme_mode = ft.ThemeMode.DARK
         self.page.padding = 0
         self.page.spacing = 0
