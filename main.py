@@ -142,7 +142,7 @@ class InspectionApp:
                 ft.ProgressRing(width=40, height=40, color=ACCENT),
                 ft.Text(message, size=14, color=TEXT_SEC),
             ], spacing=16, alignment=ft.MainAxisAlignment.CENTER),
-            alignment=ft.alignment.center,
+            content_alignment=ft.alignment.center,
         )
         self.page.update()
 
@@ -186,7 +186,7 @@ class InspectionApp:
                             ft.Container(height=20),
                             ft.ElevatedButton("重新巡检", on_click=lambda _: self._run_inspection(), bgcolor=ACCENT),
                         ], spacing=12, alignment=ft.MainAxisAlignment.CENTER),
-                        alignment=ft.alignment.center,
+                        content_alignment=ft.alignment.center,
                     )
                     self._update_status("巡检失败")
                     self.page.update()

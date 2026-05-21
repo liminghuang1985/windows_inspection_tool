@@ -345,7 +345,7 @@ $app = Get-WinEvent -FilterHashtable @{LogName='Application'; StartTime=$start} 
     if d['unsigned_drivers'] != '0': risks.append(('高','未签名驱动: '+str(d['unsigned_drivers'])+'个'))
     if d['fw_public'] == 'OFF': risks.append(('中','公用网络防火墙关闭'))
     if d['license_status'] == '未授权/未知': risks.append(('高','许可证未授权'))
-    if not d['defender_on'] or d['defender_on'] == '未启用': risks.append(('高','Defender未启用'))
+    if not d['defender_on'] or d['defender_on'] != '已启用': risks.append(('高','Defender未启用'))
     d['risks'] = risks
 
     # 巡检元信息
