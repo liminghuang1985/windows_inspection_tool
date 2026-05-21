@@ -33,21 +33,13 @@ jobs:
         run: |
           Get-ChildItem -Filter "*.exe" -Recurse | Select-Object FullName, Length
 
-      - name: Upload to GitHub Release
+      - name: Upload Release Asset
         if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
           files: |
             dist/*.exe
           fail_on_unmatched_files: true
-
-      - name: Create GitHub Release (auto)
-        if: github.event_name != 'release'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          VERSION="build-$(date +%Y%m%d-%H%M%S)"
-          gh release create "$VERSION" dist/*.exe --draft --prerelease 2>&1 || echo "Release creation skipped"
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
