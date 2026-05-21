@@ -6,7 +6,7 @@
 
 import flet as ft
 
-CARD_BG = "#1a1a3e"
+CARD_BG = "#1B2838"
 ACCENT  = "#4a9eff"
 GREEN   = "#34a853"
 GRAY    = "#888888"
@@ -45,13 +45,13 @@ def build_page(data: dict) -> list:
     proc_items = []
     for name, mem in data.get('proc_top10', []):
         proc_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
+            padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Text(name, size=12, color="#FFFFFF", width=150),
                 ft.Text(f"{mem:,} KB", size=12, color=ACCENT, weight=ft.FontWeight.W_600),
                 ft.Container(expand=True),
                 ft.Container(
-                    height=6, width=80, border_radius=3, bgcolor="#2d2d5a",
+                    height=6, width=80, border_radius=3, bgcolor="#2A3A4A",
                     content=ft.Stack([
                         ft.Container(width=80, height=6, border_radius=3, bgcolor=ACCENT),
                     ]),
@@ -73,7 +73,7 @@ def build_page(data: dict) -> list:
         startup_items = []
         for item in data.get('startup_items', []):
             startup_items.append(ft.Container(
-                padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
+                padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
                 content=ft.Column([
                     ft.Text(item.get('name',''), size=12, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                     ft.Text(item.get('cmd',''), size=10, color=GRAY, max_lines=2),
@@ -94,7 +94,7 @@ def build_page(data: dict) -> list:
         task_items = []
         for t in data.get('sched_tasks', []):
             task_items.append(ft.Container(
-                padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
+                padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
                 content=ft.Column([
                     ft.Row([
                         ft.Text(t.get('name',''), size=12, weight=ft.FontWeight.W_600, color="#FFFFFF"),
@@ -123,7 +123,7 @@ def build_page(data: dict) -> list:
     sw_items = []
     for s in software[:30]:
         sw_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
+            padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Column([
                     ft.Text(s.get('name',''), size=12, weight=ft.FontWeight.W_600, color="#FFFFFF"),
@@ -148,11 +148,11 @@ def build_page(data: dict) -> list:
     update_items = []
     for u in data.get('updates', []):
         update_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
+            padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Container(
                     padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
-                    border_radius=6, bgcolor="#2a2a5a",
+                    border_radius=6, bgcolor="#2A3A4A",
                     content=ft.Text(u.get('id',''), size=11, color=ACCENT, weight=ft.FontWeight.W_600),
                 ),
                 ft.Text(u.get('type',''), size=11, color=GRAY),

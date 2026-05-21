@@ -17,8 +17,8 @@ from inspector.reporter import generate_html, save_html_report
 from ui.pages import page_overview, page_hardware, page_security, page_processes
 
 # ==================== 主题配置 ====================
-DARK_BG  = "#0f0f23"
-CARD_BG  = "#1a1a3e"
+DARK_BG  = "#0A0F1A"
+CARD_BG  = "#1B2838"
 ACCENT   = "#4a9eff"
 TEXT_PRI = "#ffffff"
 TEXT_SEC = "#888888"
@@ -55,7 +55,7 @@ class InspectionApp:
         self.tab_buttons = []
         tab_row = ft.Container(
             padding=ft.Padding.only(left=16, right=16, top=8, bottom=8),
-            bgcolor="#0d0d1a",
+            bgcolor="#0A0F1A",
             content=ft.Row(self._make_tab_buttons(), spacing=0),
         )
 
@@ -69,7 +69,7 @@ class InspectionApp:
         # 底部状态栏
         self.status_bar = ft.Container(
             padding=ft.Padding.only(left=16, right=16, top=6, bottom=6),
-            bgcolor="#0d0d1a",
+            bgcolor="#0A0F1A",
             content=ft.Row([
                 self.status_text("就绪"),
                 ft.Container(expand=True),

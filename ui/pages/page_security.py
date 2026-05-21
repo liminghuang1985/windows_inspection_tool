@@ -6,7 +6,7 @@
 
 import flet as ft
 
-CARD_BG = "#1a1a3e"
+CARD_BG = "#1B2838"
 ACCENT  = "#4a9eff"
 GREEN   = "#34a853"
 YELLOW  = "#f9ab00"
@@ -101,7 +101,7 @@ def build_page(data: dict) -> list:
         en = u.get('enabled', 'N/A') == 'True'
         en_color = GREEN if en else RED
         user_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
+            padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Text(u.get('name',''), size=13, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                 ft.Container(expand=True),
@@ -139,7 +139,7 @@ def _fw_row(name: str, status: str) -> ft.Container:
     on = status == 'ON'
     color = GREEN if on else RED
     return ft.Container(
-        padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
+        padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
         content=ft.Row([
             ft.Text(name, size=12, color="#FFFFFF"),
             ft.Container(expand=True),

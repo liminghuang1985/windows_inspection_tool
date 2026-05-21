@@ -6,8 +6,8 @@
 
 import flet as ft
 
-DARK_BG = "#0f0f23"
-CARD_BG = "#1a1a3e"
+DARK_BG = "#0A0F1A"
+CARD_BG = "#1B2838"
 ACCENT  = "#4a9eff"
 GREEN   = "#34a853"
 YELLOW  = "#f9ab00"
@@ -72,7 +72,7 @@ def build_page(data: dict) -> list:
                 ft.Text(f"{cpu_load:.0f}%", size=28, weight=ft.FontWeight.W_700, color=cpu_color),
                 ft.Container(
                     height=8, border_radius=4,
-                    bgcolor="#2d2d5a",
+                    bgcolor="#2A3A4A",
                     content=ft.Stack([
                         ft.Container(width=max(cpu_load, 2), height=8, border_radius=4, bgcolor=cpu_color),
                     ]),
@@ -88,7 +88,7 @@ def build_page(data: dict) -> list:
                 ft.Text(f"{mem_pct:.1f}%", size=28, weight=ft.FontWeight.W_700, color=mem_color),
                 ft.Container(
                     height=8, border_radius=4,
-                    bgcolor="#2d2d5a",
+                    bgcolor="#2A3A4A",
                     content=ft.Stack([
                         ft.Container(width=max(mem_pct, 2), height=8, border_radius=4, bgcolor=mem_color),
                     ]),
@@ -104,7 +104,7 @@ def build_page(data: dict) -> list:
         pct = float(disk.get('pct', 0))
         color = GREEN if pct < 70 else YELLOW if pct < 90 else RED
         disk_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=6),
+            padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=6),
             content=ft.Row([
                 ft.Column([ft.Text(disk.get('drive',''), size=14, weight=ft.FontWeight.W_600, color="#FFFFFF")], spacing=0),
                 ft.Column([ft.Text(disk.get('label','N/A'), size=10, color=GRAY), ft.Text(f"{disk.get('free','N/A')}GB 可用", size=10, color=GRAY)], spacing=0, tight=True),
@@ -123,7 +123,7 @@ def build_page(data: dict) -> list:
     for level, desc in risks:
         color = RED if level == '高' else YELLOW
         risk_items.append(ft.Container(
-            padding=10, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=6),
+            padding=10, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=6),
             content=ft.Row([
                 ft.Container(
                     width=8, height=8, border_radius=4, bgcolor=color,
