@@ -86,7 +86,7 @@ class InspectionApp:
             is_selected = (i == self.tab_index)
             btn = ft.Container(
                 padding=ft.Padding.only(left=20, right=20, top=10, bottom=10),
-                border_radius=ft.BorderRadius(topLeft=10, topRight=10, bottomLeft=0, bottomRight=0),
+                border_radius=ft.BorderRadius(top_left=10, top_right=10, bottom_left=0, bottom_right=0),
                 bgcolor="#1B2838" if is_selected else "transparent",
                 on_click=lambda e, idx=i: self._switch_tab(idx),
                 content=ft.Column([
