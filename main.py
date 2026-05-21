@@ -35,9 +35,9 @@ class InspectionApp:
     def __init__(self, page: ft.Page):
         self.page = page
         self.page.title = "Windows 系统巡检工具"
-        self.page.window_width = 1100
-        self.page.window_height = 750
-        self.page.window_resizable = False
+        self.page.window_width = 550
+        self.page.window_height = 375
+        self.page.window_resizable = True
         self.page.theme_mode = ft.ThemeMode.DARK
         self.page.padding = 0
         self.page.spacing = 0
@@ -87,7 +87,7 @@ class InspectionApp:
             btn = ft.Container(
                 padding=ft.Padding.only(left=20, right=20, top=10, bottom=10),
                 border_radius=ft.BorderRadius(top_left=10, top_right=10, bottom_left=0, bottom_right=0),
-                bgcolor="#1B2838" if is_selected else "transparent",
+                bgcolor="#2D4A6A" if is_selected else "#1B2838",
                 on_click=lambda e, idx=i: self._switch_tab(idx),
                 content=ft.Column([
                     ft.Row([
