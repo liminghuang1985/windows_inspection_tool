@@ -17,7 +17,7 @@ def build_page(data: dict) -> list:
 
     # 进程/服务统计
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Row([
             ft.Column([
                 ft.Text(f"{data.get('proc_count', 'N/A')}", size=28, weight=ft.FontWeight.W_700, color=ACCENT),
@@ -43,7 +43,8 @@ def build_page(data: dict) -> list:
 
     # 内存Top10进程
     proc_items = []
-    for name, mem in data.get('proc_top10', []):
+    proc_list = data.get('proc_top10', [])
+    for i, (name, mem) in enumerate(proc_list):
         proc_items.append(ft.Container(
             padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
@@ -58,12 +59,14 @@ def build_page(data: dict) -> list:
                 ),
             ], spacing=8),
         ))
+        if i < len(proc_list) - 1:
+            proc_items.append(ft.Container(height=1, bgcolor="#2A3A4A", margin=ft.Margin.only(bottom=4)))
 
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column(
             [ft.Text('📊 内存 Top10 进程', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-             ft.Divider(height=12, color=CARD_BG)] + proc_items,
+             ft.Divider(height=12, color="#1B2838")] + proc_items,
             spacing=4,
         ),
     ))
@@ -71,7 +74,8 @@ def build_page(data: dict) -> list:
     # 启动项
     if data.get('startup_items'):
         startup_items = []
-        for item in data.get('startup_items', []):
+        startup_list = data.get('startup_items', [])
+        for i, item in enumerate(startup_list):
             startup_items.append(ft.Container(
                 padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
                 content=ft.Column([
@@ -79,12 +83,14 @@ def build_page(data: dict) -> list:
                     ft.Text(item.get('cmd',''), size=10, color=GRAY, max_lines=2),
                 ], spacing=2),
             ))
+            if i < len(startup_list) - 1:
+                startup_items.append(ft.Container(height=1, bgcolor="#2A3A4A", margin=ft.Margin.only(bottom=4)))
 
         cards.append(ft.Container(
-            padding=16, border_radius=16, bgcolor=CARD_BG,
+            padding=16, border_radius=16, bgcolor="#1B2838",
             content=ft.Column(
-                [ft.Text(f'🚀 启动项 ({len(startup_items)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-                 ft.Divider(height=12, color=CARD_BG)] + startup_items,
+                [ft.Text(f'🚀 启动项 ({len(startup_list)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
+                 ft.Divider(height=12, color="#1B2838")] + startup_items,
                 spacing=4,
             ),
         ))
@@ -92,7 +98,8 @@ def build_page(data: dict) -> list:
     # 计划任务
     if data.get('sched_tasks'):
         task_items = []
-        for t in data.get('sched_tasks', []):
+        task_list = data.get('sched_tasks', [])
+        for i, t in enumerate(task_list):
             task_items.append(ft.Container(
                 padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
                 content=ft.Column([
@@ -101,19 +108,21 @@ def build_page(data: dict) -> list:
                         ft.Container(expand=True),
                         ft.Container(
                             padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
-                            border_radius=6, bgcolor="#4a9eff",
+                            border_radius=6, bgcolor=ACCENT,
                             content=ft.Text(t.get('state',''), size=10, color="#FFFFFF"),
                         ),
                     ]),
                     ft.Text(t.get('action','')[:80], size=10, color=GRAY),
                 ], spacing=2),
             ))
+            if i < len(task_list) - 1:
+                task_items.append(ft.Container(height=1, bgcolor="#2A3A4A", margin=ft.Margin.only(bottom=4)))
 
         cards.append(ft.Container(
-            padding=16, border_radius=16, bgcolor=CARD_BG,
+            padding=16, border_radius=16, bgcolor="#1B2838",
             content=ft.Column(
-                [ft.Text(f'📅 计划任务 ({len(task_items)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-                 ft.Divider(height=12, color=CARD_BG)] + task_items,
+                [ft.Text(f'📅 计划任务 ({len(task_list)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
+                 ft.Divider(height=12, color="#1B2838")] + task_items,
                 spacing=4,
             ),
         ))
@@ -121,7 +130,8 @@ def build_page(data: dict) -> list:
     # 已安装软件
     software = data.get('software', [])
     sw_items = []
-    for s in software[:30]:
+    sw_display = software[:30]
+    for i, s in enumerate(sw_display):
         sw_items.append(ft.Container(
             padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
@@ -133,12 +143,14 @@ def build_page(data: dict) -> list:
                 ft.Text(s.get('install_date',''), size=10, color=GRAY),
             ], spacing=8),
         ))
+        if i < len(sw_display) - 1:
+            sw_items.append(ft.Container(height=1, bgcolor="#2A3A4A", margin=ft.Margin.only(bottom=4)))
 
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column(
             [ft.Text(f'📦 已安装软件 ({len(software)} 个)', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-             ft.Divider(height=12, color=CARD_BG)] + sw_items +
+             ft.Divider(height=12, color="#1B2838")] + sw_items +
             ([ft.Text(f'... 共 {len(software)} 个，显示前30条', size=11, color=GRAY)] if len(software) > 30 else []),
             spacing=4,
         ),
@@ -146,7 +158,8 @@ def build_page(data: dict) -> list:
 
     # 最近补丁
     update_items = []
-    for u in data.get('updates', []):
+    update_list = data.get('updates', [])
+    for i, u in enumerate(update_list):
         update_items.append(ft.Container(
             padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
@@ -160,12 +173,14 @@ def build_page(data: dict) -> list:
                 ft.Text(u.get('date',''), size=10, color=GRAY),
             ], spacing=8),
         ))
+        if i < len(update_list) - 1:
+            update_items.append(ft.Container(height=1, bgcolor="#2A3A4A", margin=ft.Margin.only(bottom=4)))
 
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column(
-            [ft.Text(f'🔧 最近补丁 ({len(update_items)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-             ft.Divider(height=12, color=CARD_BG)] + update_items,
+            [ft.Text(f'🔧 最近补丁 ({len(update_list)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
+             ft.Divider(height=12, color="#1B2838")] + update_items,
             spacing=4,
         ),
     ))

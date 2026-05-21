@@ -100,27 +100,38 @@ def build_page(data: dict) -> list:
 
     # 磁盘卡片
     disk_items = []
-    for disk in data.get('disks', []):
+    for i, disk in enumerate(data.get('disks', [])):
         pct = float(disk.get('pct', 0))
         color = GREEN if pct < 70 else YELLOW if pct < 90 else RED
         disk_items.append(ft.Container(
             padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=6),
-            content=ft.Row([
-                ft.Column([ft.Text(disk.get('drive',''), size=14, weight=ft.FontWeight.W_600, color="#FFFFFF")], spacing=0),
-                ft.Column([ft.Text(disk.get('label','N/A'), size=10, color=GRAY), ft.Text(f"{disk.get('free','N/A')}GB 可用", size=10, color=GRAY)], spacing=0, tight=True),
-                ft.Container(expand=True),
-                ft.Text(f"{pct:.1f}%", size=14, weight=ft.FontWeight.W_700, color=color),
-            ], spacing=8),
+            content=ft.Column([
+                ft.Row([
+                    ft.Column([ft.Text(disk.get('drive',''), size=14, weight=ft.FontWeight.W_600, color="#FFFFFF")], spacing=0),
+                    ft.Column([ft.Text(disk.get('label','N/A'), size=10, color=GRAY), ft.Text(f"{disk.get('free','N/A')}GB 可用 / {disk.get('total','N/A')}GB", size=10, color=GRAY)], spacing=0, tight=True),
+                    ft.Container(expand=True),
+                    ft.Text(f"{pct:.1f}%", size=14, weight=ft.FontWeight.W_700, color=color),
+                ], spacing=8),
+                ft.Container(
+                    height=6, border_radius=3, bgcolor="#2A3A4A",
+                    content=ft.Stack([
+                        ft.Container(width=max(int(pct/100*200), 4), height=6, border_radius=3, bgcolor=color),
+                    ]),
+                ),
+            ], spacing=4),
         ))
+        # 细分隔线（非最后一项）
+        if i < len(data.get('disks', [])) - 1:
+            disk_items.append(ft.Container(height=1, bgcolor="#2A3A4A", margin=ft.Margin.only(bottom=5)))
 
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column([ft.Text('💾 磁盘', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] + disk_items, spacing=4),
     ))
 
     # 风险告警列表
     risk_items = []
-    for level, desc in risks:
+    for i, (level, desc) in enumerate(risks):
         color = RED if level == '高' else YELLOW
         risk_items.append(ft.Container(
             padding=10, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=6),
@@ -137,6 +148,8 @@ def build_page(data: dict) -> list:
                 ),
             ], spacing=8),
         ))
+        if i < len(risks) - 1:
+            risk_items.append(ft.Container(height=1, bgcolor="#2A3A4A", margin=ft.Margin.only(bottom=5)))
 
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,

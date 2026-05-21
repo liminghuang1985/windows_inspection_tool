@@ -18,13 +18,26 @@ def build_page(data: dict) -> list:
     cards = []
 
     # 防火墙状态
-    fw_items = [
-        _fw_row('域网络', data.get('fw_domain', 'OFF')),
-        _fw_row('专用网络', data.get('fw_private', 'OFF')),
-        _fw_row('公用网络', data.get('fw_public', 'OFF')),
-    ]
+    fw_items = []
+    for i, (name, status) in enumerate([('域网络', data.get('fw_domain', 'OFF')), ('专用网络', data.get('fw_private', 'OFF')), ('公用网络', data.get('fw_public', 'OFF'))]):
+        on = status == 'ON'
+        color = GREEN if on else RED
+        fw_items.append(ft.Container(
+            padding=8, border_radius=8, bgcolor="#1B2838", margin=ft.Margin.only(bottom=4),
+            content=ft.Row([
+                ft.Text(name, size=12, color="#FFFFFF"),
+                ft.Container(expand=True),
+                ft.Container(
+                    padding=ft.Padding.only(left=12, right=12, top=3, bottom=3),
+                    border_radius=6, bgcolor=color,
+                    content=ft.Text(status, size=11, weight=ft.FontWeight.W_700, color="#FFFFFF"),
+                ),
+            ], spacing=8),
+        ))
+        if i < 2:
+            fw_items.append(ft.Container(height=1, bgcolor="#2A3A4A", margin=ft.Margin.only(bottom=4)))
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column(
             [ft.Text('🛡️ 防火墙状态', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] + fw_items,
             spacing=4,
@@ -34,10 +47,10 @@ def build_page(data: dict) -> list:
     # RDP状态
     rdp_color = YELLOW if data.get('rdp_enabled') == '已启用' else GREEN
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column([
             ft.Text('🖥️ 远程桌面(RDP)', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-            ft.Divider(height=12, color=CARD_BG),
+            ft.Divider(height=12, color="#1B2838"),
             _info_row('RDP状态', data.get('rdp_enabled', 'N/A'), badge=data.get('rdp_enabled',''), badge_color=rdp_color),
             _info_row('NLA保护', data.get('rdp_nla', 'N/A')),
             _info_row('端口', data.get('rdp_port', '3389')),
@@ -47,10 +60,10 @@ def build_page(data: dict) -> list:
     # BitLocker
     bl_on = data.get('bitlocker_available', False)
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column([
             ft.Text('🔐 BitLocker 加密', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-            ft.Divider(height=12, color=CARD_BG),
+            ft.Divider(height=12, color="#1B2838"),
             _info_row('状态', '已启用' if bl_on else '未启用/不可用', badge='已启用' if bl_on else '未启用', badge_color=GREEN if bl_on else GRAY),
         ], spacing=0),
     ))
@@ -59,10 +72,10 @@ def build_page(data: dict) -> list:
     def_status = data.get('defender_on', 'N/A')
     def_color = GREEN if def_status == '已启用' else RED
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column([
             ft.Text('🦠 Windows Defender', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-            ft.Divider(height=12, color=CARD_BG),
+            ft.Divider(height=12, color="#1B2838"),
             _info_row('防病毒', def_status, badge=def_status, badge_color=def_color),
             _info_row('实时保护', data.get('defender_rtp', 'N/A')),
             _info_row('引擎版本', data.get('defender_version', 'N/A')),
@@ -72,10 +85,10 @@ def build_page(data: dict) -> list:
 
     # 时间同步
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column([
             ft.Text('⏰ 时间同步', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-            ft.Divider(height=12, color=CARD_BG),
+            ft.Divider(height=12, color="#1B2838"),
             _info_row('服务状态', data.get('time_sync', 'N/A')),
             _info_row('时间源', data.get('time_source', 'N/A')),
         ], spacing=0),
@@ -87,17 +100,17 @@ def build_page(data: dict) -> list:
         pw_items.append(_info_row(k, v))
     if pw_items:
         cards.append(ft.Container(
-            padding=16, border_radius=16, bgcolor=CARD_BG,
+            padding=16, border_radius=16, bgcolor="#1B2838",
             content=ft.Column(
                 [ft.Text('🔑 密码策略', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-                 ft.Divider(height=12, color=CARD_BG)] + pw_items,
+                 ft.Divider(height=12, color="#1B2838")] + pw_items,
                 spacing=0,
             ),
         ))
 
     # 本地用户
     user_items = []
-    for u in data.get('local_users', []):
+    for i, u in enumerate(data.get('local_users', [])):
         en = u.get('enabled', 'N/A') == 'True'
         en_color = GREEN if en else RED
         user_items.append(ft.Container(
@@ -113,9 +126,11 @@ def build_page(data: dict) -> list:
                 ),
             ], spacing=8),
         ))
+        if i < len(data.get('local_users', [])) - 1:
+            user_items.append(ft.Container(height=1, bgcolor="#2A3A4A", margin=ft.Margin.only(bottom=4)))
 
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column(
             [ft.Text(f'👤 本地用户 ({len(user_items)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] + user_items,
             spacing=4,
@@ -124,10 +139,10 @@ def build_page(data: dict) -> list:
 
     # 管理员组
     cards.append(ft.Container(
-        padding=16, border_radius=16, bgcolor=CARD_BG,
+        padding=16, border_radius=16, bgcolor="#1B2838",
         content=ft.Column([
             ft.Text('👥 管理员组成员', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
-            ft.Divider(height=12, color=CARD_BG),
+            ft.Divider(height=12, color="#1B2838"),
             ft.Text(data.get('admin_members', 'N/A'), size=12, color="#FFFFFF"),
         ], spacing=0),
     ))

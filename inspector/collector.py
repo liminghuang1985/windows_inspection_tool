@@ -99,6 +99,10 @@ def collect_all() -> Dict[str, Any]:
 
     chips = ps("Get-CimInstance Win32_PhysicalMemory|ForEach-Object{Write-Output \"$($_.Manufacturer)|$([math]::Round($_.Capacity/1GB,0))GB|$($_.Speed)MHz|$($_.PartNumber.Trim())\"}")
     d['mem_chips'] = [c.strip() for c in chips.split('\n') if c.strip()] if chips else []
+    # 内存插槽信息
+    slot_info = ps("Get-CimInstance Win32_PhysicalMemoryArray|Select-Object -First 1 -ExpandProperty MemoryDevices")
+    d['mem_total_slots'] = int(slot_info.strip()) if slot_info and slot_info.strip().isdigit() else len(d['mem_chips'])
+    d['mem_used_slots'] = len(d['mem_chips'])
 
     # 7. 磁盘
     dk = ps("Get-CimInstance Win32_LogicalDisk -Filter 'DriveType=3'|ForEach-Object{$t=[math]::Round($_.Size/1GB,1);$f=[math]::Round($_.FreeSpace/1GB,1);$u=[math]::Round($t-$f,1);$p=if($t-gt 0){[math]::Round($u/$t*100,1)}else{0};Write-Output \"$($_.DeviceID)|$($_.VolumeName)|$t|$f|$u|$p\"}")
