@@ -35,17 +35,17 @@ class InspectionApp:
     def __init__(self, page: ft.Page):
         self.page = page
         self.page.title = "Windows 系统巡检工具"
-        self.page.window_width = 550
-        self.page.window_height = 900
-        self.page.window_min_width = 550
-        self.page.window_min_height = 900
-        self.page.window_max_width = 550
-        self.page.window_max_height = 900
-        self.page.window_resizable = False
-        self.page.update()
+        self.page.window.width = 550
+        self.page.window.height = 900
+        self.page.window.min_width = 550
+        self.page.window.min_height = 900
+        self.page.window.max_width = 550
+        self.page.window.max_height = 900
+        self.page.window.resizable = False
         self.page.theme_mode = ft.ThemeMode.DARK
         self.page.padding = 0
         self.page.spacing = 0
+        self.page.update()
 
         self.data = None
         self.loading = False
