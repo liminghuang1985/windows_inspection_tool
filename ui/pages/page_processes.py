@@ -100,7 +100,7 @@ def build_page(data: dict) -> list:
                         ft.Text(t.get('name',''), size=12, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
                         ft.Container(expand=True),
                         ft.Container(
-                            padding=ft.padding.only(left=8, right=8, top=2, bottom=2),
+                            padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
                             border_radius=6, bgcolor="#4a9eff",
                             content=ft.Text(t.get('state',''), size=10, color=ft.colors.WHITE),
                         ),
@@ -151,7 +151,7 @@ def build_page(data: dict) -> list:
             padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
             content=ft.Row([
                 ft.Container(
-                    padding=ft.padding.only(left=8, right=8, top=2, bottom=2),
+                    padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
                     border_radius=6, bgcolor="#2a2a5a",
                     content=ft.Text(u.get('id',''), size=11, color=ACCENT, weight=ft.FontWeight.W_600),
                 ),

@@ -55,7 +55,7 @@ def build_page(data: dict) -> list:
                     ft.Text(a.get('name',''), size=13, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
                     ft.Container(expand=True),
                     ft.Container(
-                        padding=ft.padding.only(left=8, right=8, top=2, bottom=2),
+                        padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
                         border_radius=6, bgcolor=status_color,
                         content=ft.Text(a.get('status','N/A'), size=10, color=ft.colors.WHITE),
                     ),
@@ -134,7 +134,7 @@ def build_page(data: dict) -> list:
 
 def _info_row(label: str, value: str) -> ft.Container:
     return ft.Container(
-        padding=ft.padding.only(top=5, bottom=5),
+        padding=ft.Padding.only(top=5, bottom=5),
         content=ft.Row([
             ft.Text(label, size=12, color=GRAY, width=90),
             ft.Text(str(value), size=12, color=ft.colors.WHITE),

@@ -107,7 +107,7 @@ def build_page(data: dict) -> list:
                 ft.Container(expand=True),
                 ft.Text(f"最后登录: {u.get('lastlogon','N/A')}", size=10, color=GRAY),
                 ft.Container(
-                    padding=ft.padding.only(left=8, right=8, top=2, bottom=2),
+                    padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
                     border_radius=6, bgcolor=en_color,
                     content=ft.Text('已启用' if en else '已禁用', size=10, color=ft.colors.WHITE),
                 ),
@@ -144,7 +144,7 @@ def _fw_row(name: str, status: str) -> ft.Container:
             ft.Text(name, size=12, color=ft.colors.WHITE),
             ft.Container(expand=True),
             ft.Container(
-                padding=ft.padding.only(left=12, right=12, top=3, bottom=3),
+                padding=ft.Padding.only(left=12, right=12, top=3, bottom=3),
                 border_radius=6, bgcolor=color,
                 content=ft.Text(status, size=11, weight=ft.FontWeight.W_700, color=ft.colors.WHITE),
             ),
@@ -154,13 +154,13 @@ def _fw_row(name: str, status: str) -> ft.Container:
 
 def _info_row(label: str, value: str, badge: str = None, badge_color: str = None) -> ft.Container:
     return ft.Container(
-        padding=ft.padding.only(top=5, bottom=5),
+        padding=ft.Padding.only(top=5, bottom=5),
         content=ft.Row([
             ft.Text(label, size=12, color=GRAY, width=100),
             ft.Text(str(value), size=12, color=ft.colors.WHITE),
             ft.Container(expand=True),
             ft.Container(
-                padding=ft.padding.only(left=8, right=8, top=2, bottom=2),
+                padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
                 border_radius=6, bgcolor=badge_color or GRAY,
                 content=ft.Text(badge or '', size=10, color=ft.colors.WHITE),
             ) if badge else ft.Container(),

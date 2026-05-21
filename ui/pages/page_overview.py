@@ -45,7 +45,7 @@ def build_page(data: dict) -> list:
                 ], spacing=4),
                 ft.Container(expand=True),
                 ft.Container(
-                    padding=ft.padding.only(left=16, right=16, top=8, bottom=8),
+                    padding=ft.Padding.only(left=16, right=16, top=8, bottom=8),
                     border_radius=12,
                     bgcolor=risk_color,
                     content=ft.Text(f'⚠️ {risk_level}风险', size=16, weight=ft.FontWeight.W_700, color=ft.colors.WHITE),
@@ -131,7 +131,7 @@ def build_page(data: dict) -> list:
                 ft.Text(desc, size=12, color=ft.colors.WHITE),
                 ft.Container(expand=True),
                 ft.Container(
-                    padding=ft.padding.only(left=8, right=8, top=3, bottom=3),
+                    padding=ft.Padding.only(left=8, right=8, top=3, bottom=3),
                     border_radius=6, bgcolor=color,
                     content=ft.Text(level, size=10, weight=ft.FontWeight.W_700, color=ft.colors.WHITE),
                 ),
