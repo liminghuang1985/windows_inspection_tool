@@ -36,11 +36,11 @@ class InspectionApp:
         self.page = page
         self.page.title = "Windows 系统巡检工具"
         self.page.window.width = 550
-        self.page.window.height = 900
+        self.page.window.height = 1000
         self.page.window.min_width = 550
-        self.page.window.min_height = 900
+        self.page.window.min_height = 1000
         self.page.window.max_width = 550
-        self.page.window.max_height = 900
+        self.page.window.max_height = 1000
         self.page.window.resizable = False
         self.page.theme_mode = ft.ThemeMode.DARK
         self.page.padding = 0
@@ -62,7 +62,7 @@ class InspectionApp:
         self.tab_row = ft.Container(
             padding=ft.Padding.only(left=16, right=16, top=8, bottom=8),
             bgcolor=DARK_BG,
-            content=ft.Row(self._make_tab_buttons(), spacing=0, vertical_alignment=ft.CrossAxisAlignment.CENTER),
+            content=ft.Row(self._make_tab_buttons(), spacing=0, alignment=ft.MainAxisAlignment.SPACE_EVENLY, vertical_alignment=ft.CrossAxisAlignment.CENTER),
         )
 
         # 页面内容区
@@ -90,6 +90,7 @@ class InspectionApp:
         for i, (label, icon) in enumerate(PAGE_TABS):
             is_selected = (i == self.tab_index)
             btn = ft.Container(
+                expand=True,
                 padding=ft.Padding.only(left=20, right=20, top=10, bottom=10),
                 border_radius=ft.BorderRadius(top_left=10, top_right=10, bottom_left=0, bottom_right=0),
                 bgcolor="#2D4A6A" if is_selected else "#1B2838",
@@ -119,7 +120,7 @@ class InspectionApp:
         self.tab_index = index
         # 重建Tab按钮以更新选中样式
         self.tab_buttons = []
-        self.tab_row.content = ft.Row(self._make_tab_buttons(), spacing=0, vertical_alignment=ft.CrossAxisAlignment.CENTER)
+        self.tab_row.content = ft.Row(self._make_tab_buttons(), spacing=0, alignment=ft.MainAxisAlignment.SPACE_EVENLY, vertical_alignment=ft.CrossAxisAlignment.CENTER)
         self._render_page()
         self.page.update()
 
