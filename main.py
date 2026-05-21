@@ -37,6 +37,7 @@ class InspectionApp:
         self.page.title = "Windows 系统巡检工具"
         self.page.window_width = 1100
         self.page.window_height = 750
+        self.page.window_resizable = False
         self.page.theme_mode = ft.ThemeMode.DARK
         self.page.padding = 0
         self.page.spacing = 0
@@ -53,10 +54,10 @@ class InspectionApp:
         """构建UI"""
         # 顶部TabBar
         self.tab_buttons = []
-        tab_row = ft.Container(
+        self.tab_row = ft.Container(
             padding=ft.Padding.only(left=16, right=16, top=8, bottom=8),
-            bgcolor="#0A0F1A",
-            content=ft.Row(self._make_tab_buttons(), spacing=0),
+            bgcolor=DARK_BG,
+            content=ft.Row(self._make_tab_buttons(), spacing=0, vertical_alignment=ft.CrossAxisAlignment.CENTER),
         )
 
         # 页面内容区
@@ -77,38 +78,43 @@ class InspectionApp:
             ]),
         )
 
-        self.page.add(tab_row, self.content_area, self.status_bar)
+        self.page.add(self.tab_row, self.content_area, self.status_bar)
 
     def _make_tab_buttons(self):
         buttons = []
         for i, (label, icon) in enumerate(PAGE_TABS):
+            is_selected = (i == self.tab_index)
             btn = ft.Container(
                 padding=ft.Padding.only(left=20, right=20, top=10, bottom=10),
-                border=ft.Border(bottom=ft.border.BorderSide(3, ACCENT if i == self.tab_index else "transparent")),
+                border_radius=ft.BorderRadius(topLeft=10, topRight=10, bottomLeft=0, bottomRight=0),
+                bgcolor="#1B2838" if is_selected else "transparent",
                 on_click=lambda e, idx=i: self._switch_tab(idx),
-                content=ft.Row([
-                    ft.Text(icon, size=16),
-                    ft.Text(label, size=14, weight=ft.FontWeight.W_600 if i == self.tab_index else ft.FontWeight.W_400,
-                            color=ACCENT if i == self.tab_index else TEXT_SEC),
-                ], spacing=6),
+                content=ft.Column([
+                    ft.Row([
+                        ft.Text(icon, size=16),
+                        ft.Text(label, size=14, weight=ft.FontWeight.W_700 if is_selected else ft.FontWeight.W_600,
+                                color="#FFFFFF" if is_selected else TEXT_SEC),
+                    ], spacing=6, alignment=ft.MainAxisAlignment.CENTER),
+                ], spacing=0, horizontal_alignment=ft.CrossAxisAlignment.CENTER),
             )
             buttons.append(btn)
             self.tab_buttons.append(btn)
+            # 添加 | 分隔符（非最后一项）
+            if i < len(PAGE_TABS) - 1:
+                sep = ft.Container(
+                    width=1,
+                    bgcolor="#2A3A4A",
+                    margin=ft.Margin.only(top=10, bottom=10),
+                )
+                buttons.append(sep)
         return buttons
 
     def _switch_tab(self, index: int):
         """切换Tab"""
         self.tab_index = index
-        # 更新Tab样式
-        for i, btn in enumerate(self.tab_buttons):
-            label = PAGE_TABS[i][0]
-            icon = PAGE_TABS[i][1]
-            btn.border = ft.Border(bottom=ft.border.BorderSide(3, ACCENT if i == index else "transparent"))
-            btn.content = ft.Row([
-                ft.Text(icon, size=16),
-                ft.Text(label, size=14, weight=ft.FontWeight.W_600 if i == index else ft.FontWeight.W_400,
-                        color=ACCENT if i == index else TEXT_SEC),
-            ], spacing=6)
+        # 重建Tab按钮以更新选中样式
+        self.tab_buttons = []
+        self.tab_row.content = ft.Row(self._make_tab_buttons(), spacing=0, vertical_alignment=ft.CrossAxisAlignment.CENTER)
         self._render_page()
         self.page.update()
 
@@ -170,7 +176,7 @@ class InspectionApp:
                     # 自动生成报告
                     try:
                         path = save_html_report(self.data)
-                        self._update_status(f"巡检完成 · 报告已保存: {os.path.basename(path)}")
+                        self._update_status(f"巡检完成 · 报告已保存到桌面: {os.path.basename(path)}")
                     except Exception as e:
                         self._update_status(f"巡检完成 · 报告保存失败: {e}")
                     self.page.update()
