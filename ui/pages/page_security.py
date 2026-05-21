@@ -101,7 +101,7 @@ def build_page(data: dict) -> list:
         en = u.get('enabled', 'N/A') == 'True'
         en_color = GREEN if en else RED
         user_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
+            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Text(u.get('name',''), size=13, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
                 ft.Container(expand=True),
@@ -139,7 +139,7 @@ def _fw_row(name: str, status: str) -> ft.Container:
     on = status == 'ON'
     color = GREEN if on else RED
     return ft.Container(
-        padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
+        padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
         content=ft.Row([
             ft.Text(name, size=12, color=ft.colors.WHITE),
             ft.Container(expand=True),

@@ -84,7 +84,7 @@ class InspectionApp:
         for i, (label, icon) in enumerate(PAGE_TABS):
             btn = ft.Container(
                 padding=ft.Padding.only(left=20, right=20, top=10, bottom=10),
-                border=ft.border.only(bottom=ft.border.BorderSide(3, ACCENT if i == self.tab_index else "transparent")),
+                border=ft.Border(bottom=ft.border.BorderSide(3, ACCENT if i == self.tab_index else "transparent")),
                 on_click=lambda e, idx=i: self._switch_tab(idx),
                 content=ft.Row([
                     ft.Text(icon, size=16),
@@ -103,7 +103,7 @@ class InspectionApp:
         for i, btn in enumerate(self.tab_buttons):
             label = PAGE_TABS[i][0]
             icon = PAGE_TABS[i][1]
-            btn.border = ft.border.only(bottom=ft.border.BorderSide(3, ACCENT if i == index else "transparent"))
+            btn.border = ft.Border(bottom=ft.border.BorderSide(3, ACCENT if i == index else "transparent"))
             btn.content = ft.Row([
                 ft.Text(icon, size=16),
                 ft.Text(label, size=14, weight=ft.FontWeight.W_600 if i == index else ft.FontWeight.W_400,

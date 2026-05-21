@@ -45,7 +45,7 @@ def build_page(data: dict) -> list:
     proc_items = []
     for name, mem in data.get('proc_top10', []):
         proc_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
+            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Text(name, size=12, color=ft.colors.WHITE, width=150),
                 ft.Text(f"{mem:,} KB", size=12, color=ACCENT, weight=ft.FontWeight.W_600),
@@ -73,7 +73,7 @@ def build_page(data: dict) -> list:
         startup_items = []
         for item in data.get('startup_items', []):
             startup_items.append(ft.Container(
-                padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
+                padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
                 content=ft.Column([
                     ft.Text(item.get('name',''), size=12, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
                     ft.Text(item.get('cmd',''), size=10, color=GRAY, max_lines=2),
@@ -94,7 +94,7 @@ def build_page(data: dict) -> list:
         task_items = []
         for t in data.get('sched_tasks', []):
             task_items.append(ft.Container(
-                padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
+                padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
                 content=ft.Column([
                     ft.Row([
                         ft.Text(t.get('name',''), size=12, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
@@ -123,7 +123,7 @@ def build_page(data: dict) -> list:
     sw_items = []
     for s in software[:30]:
         sw_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
+            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Column([
                     ft.Text(s.get('name',''), size=12, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
@@ -148,7 +148,7 @@ def build_page(data: dict) -> list:
     update_items = []
     for u in data.get('updates', []):
         update_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
+            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Container(
                     padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),

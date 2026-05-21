@@ -104,7 +104,7 @@ def build_page(data: dict) -> list:
         pct = float(disk.get('pct', 0))
         color = GREEN if pct < 70 else YELLOW if pct < 90 else RED
         disk_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=6),
+            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=6),
             content=ft.Row([
                 ft.Column([ft.Text(disk.get('drive',''), size=14, weight=ft.FontWeight.W_600, color=ft.colors.WHITE)], spacing=0),
                 ft.Column([ft.Text(disk.get('label','N/A'), size=10, color=GRAY), ft.Text(f"{disk.get('free','N/A')}GB 可用", size=10, color=GRAY)], spacing=0, tight=True),
@@ -123,7 +123,7 @@ def build_page(data: dict) -> list:
     for level, desc in risks:
         color = RED if level == '高' else YELLOW
         risk_items.append(ft.Container(
-            padding=10, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=6),
+            padding=10, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=6),
             content=ft.Row([
                 ft.Container(
                     width=8, height=8, border_radius=4, bgcolor=color,

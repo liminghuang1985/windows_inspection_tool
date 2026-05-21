@@ -49,7 +49,7 @@ def build_page(data: dict) -> list:
     for a in data.get('net_adapters', []):
         status_color = GREEN if a.get('status') == 'Up' else RED
         adapter_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=6),
+            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=6),
             content=ft.Column([
                 ft.Row([
                     ft.Text(a.get('name',''), size=13, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
@@ -76,7 +76,7 @@ def build_page(data: dict) -> list:
     ip_items = []
     for ip in data.get('ipv4_addrs', []):
         ip_items.append(ft.Container(
-            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
+            padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Text(ip.get('iface',''), size=12, weight=ft.FontWeight.W_600, color=ACCENT),
                 ft.Text(ip.get('ip','N/A'), size=12, color=ft.colors.WHITE),
@@ -112,7 +112,7 @@ def build_page(data: dict) -> list:
         share_items = []
         for s in data.get('shares', []):
             share_items.append(ft.Container(
-                padding=8, border_radius=8, bgcolor="#12122a", margin=ft.margin.only(bottom=4),
+                padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
                 content=ft.Row([
                     ft.Text(f"{s.get('name','N/A')} ({s.get('drive','')})", size=12, weight=ft.FontWeight.W_600, color=ACCENT),
                     ft.Text(f"→ {s.get('path','N/A')}", size=10, color=GRAY),
