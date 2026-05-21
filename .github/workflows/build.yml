@@ -27,7 +27,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Build Flet executable
-        run: cmd /c flet pack main.py --name WindowsInspector --add-data "assets;assets"
+        run: cmd /c flet pack main.py --name WindowsInspector --add-data "assets;assets" --window-width 550 --window-height 900
 
       - name: Find built exe
         run: |
