@@ -54,7 +54,7 @@ class InspectionApp:
         # 顶部TabBar
         self.tab_buttons = []
         tab_row = ft.Container(
-            padding=ft.padding.symmetric(horizontal=16, vertical=8),
+            padding=ft.padding.only(left=16, right=16, top=8, bottom=8),
             bgcolor="#0d0d1a",
             content=ft.Row(self._make_tab_buttons(), spacing=0),
         )
@@ -68,7 +68,7 @@ class InspectionApp:
 
         # 底部状态栏
         self.status_bar = ft.Container(
-            padding=ft.padding.symmetric(horizontal=16, vertical=6),
+            padding=ft.padding.only(left=16, right=16, top=6, bottom=6),
             bgcolor="#0d0d1a",
             content=ft.Row([
                 self.status_text("就绪"),
@@ -83,7 +83,7 @@ class InspectionApp:
         buttons = []
         for i, (label, icon) in enumerate(PAGE_TABS):
             btn = ft.Container(
-                padding=ft.padding.symmetric(horizontal=20, vertical=10),
+                padding=ft.padding.only(left=20, right=20, top=10, bottom=10),
                 border=ft.border.only(bottom=ft.border.BorderSide(3, ACCENT if i == self.tab_index else "transparent")),
                 on_click=lambda e, idx=i: self._switch_tab(idx),
                 content=ft.Row([
