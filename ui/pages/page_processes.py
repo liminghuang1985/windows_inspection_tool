@@ -47,7 +47,7 @@ def build_page(data: dict) -> list:
         proc_items.append(ft.Container(
             padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
-                ft.Text(name, size=12, color=ft.colors.WHITE, width=150),
+                ft.Text(name, size=12, color="#FFFFFF", width=150),
                 ft.Text(f"{mem:,} KB", size=12, color=ACCENT, weight=ft.FontWeight.W_600),
                 ft.Container(expand=True),
                 ft.Container(
@@ -62,7 +62,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column(
-            [ft.Text('📊 内存 Top10 进程', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            [ft.Text('📊 内存 Top10 进程', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
              ft.Divider(height=12, color=CARD_BG)] + proc_items,
             spacing=4,
         ),
@@ -75,7 +75,7 @@ def build_page(data: dict) -> list:
             startup_items.append(ft.Container(
                 padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
                 content=ft.Column([
-                    ft.Text(item.get('name',''), size=12, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+                    ft.Text(item.get('name',''), size=12, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                     ft.Text(item.get('cmd',''), size=10, color=GRAY, max_lines=2),
                 ], spacing=2),
             ))
@@ -83,7 +83,7 @@ def build_page(data: dict) -> list:
         cards.append(ft.Container(
             padding=16, border_radius=16, bgcolor=CARD_BG,
             content=ft.Column(
-                [ft.Text(f'🚀 启动项 ({len(startup_items)})', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+                [ft.Text(f'🚀 启动项 ({len(startup_items)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                  ft.Divider(height=12, color=CARD_BG)] + startup_items,
                 spacing=4,
             ),
@@ -97,12 +97,12 @@ def build_page(data: dict) -> list:
                 padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
                 content=ft.Column([
                     ft.Row([
-                        ft.Text(t.get('name',''), size=12, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+                        ft.Text(t.get('name',''), size=12, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                         ft.Container(expand=True),
                         ft.Container(
                             padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
                             border_radius=6, bgcolor="#4a9eff",
-                            content=ft.Text(t.get('state',''), size=10, color=ft.colors.WHITE),
+                            content=ft.Text(t.get('state',''), size=10, color="#FFFFFF"),
                         ),
                     ]),
                     ft.Text(t.get('action','')[:80], size=10, color=GRAY),
@@ -112,7 +112,7 @@ def build_page(data: dict) -> list:
         cards.append(ft.Container(
             padding=16, border_radius=16, bgcolor=CARD_BG,
             content=ft.Column(
-                [ft.Text(f'📅 计划任务 ({len(task_items)})', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+                [ft.Text(f'📅 计划任务 ({len(task_items)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                  ft.Divider(height=12, color=CARD_BG)] + task_items,
                 spacing=4,
             ),
@@ -126,7 +126,7 @@ def build_page(data: dict) -> list:
             padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Column([
-                    ft.Text(s.get('name',''), size=12, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+                    ft.Text(s.get('name',''), size=12, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                     ft.Text(f"{s.get('version','')}  |  {s.get('publisher','')[:30]}", size=10, color=GRAY),
                 ], spacing=1, tight=True),
                 ft.Container(expand=True),
@@ -137,7 +137,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column(
-            [ft.Text(f'📦 已安装软件 ({len(software)} 个)', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            [ft.Text(f'📦 已安装软件 ({len(software)} 个)', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
              ft.Divider(height=12, color=CARD_BG)] + sw_items +
             ([ft.Text(f'... 共 {len(software)} 个，显示前30条', size=11, color=GRAY)] if len(software) > 30 else []),
             spacing=4,
@@ -164,7 +164,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column(
-            [ft.Text(f'🔧 最近补丁 ({len(update_items)})', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            [ft.Text(f'🔧 最近补丁 ({len(update_items)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
              ft.Divider(height=12, color=CARD_BG)] + update_items,
             spacing=4,
         ),

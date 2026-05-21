@@ -20,7 +20,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column([
-            ft.Text('💻 CPU 信息', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            ft.Text('💻 CPU 信息', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
             ft.Divider(height=12, color=CARD_BG),
             _info_row('型号', data.get('cpu_name', 'N/A')),
             _info_row('核心/线程', f"{data.get('cpu_cores','N/A')} 核 / {data.get('cpu_threads','N/A')} 线程"),
@@ -36,7 +36,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column([
-            ft.Text('🎮 GPU 信息', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            ft.Text('🎮 GPU 信息', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
             ft.Divider(height=12, color=CARD_BG),
             _info_row('显卡', data.get('gpu', 'N/A')),
             _info_row('驱动版本', data.get('gpu_driver', 'N/A')),
@@ -52,12 +52,12 @@ def build_page(data: dict) -> list:
             padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=6),
             content=ft.Column([
                 ft.Row([
-                    ft.Text(a.get('name',''), size=13, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+                    ft.Text(a.get('name',''), size=13, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                     ft.Container(expand=True),
                     ft.Container(
                         padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
                         border_radius=6, bgcolor=status_color,
-                        content=ft.Text(a.get('status','N/A'), size=10, color=ft.colors.WHITE),
+                        content=ft.Text(a.get('status','N/A'), size=10, color="#FFFFFF"),
                     ),
                 ]),
                 ft.Text(f"速率: {a.get('speed','N/A')}  |  MAC: {a.get('mac','N/A')}", size=10, color=GRAY),
@@ -67,7 +67,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column(
-            [ft.Text('🌐 网络适配器', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE)] + adapter_items,
+            [ft.Text('🌐 网络适配器', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] + adapter_items,
             spacing=4,
         ),
     ))
@@ -79,7 +79,7 @@ def build_page(data: dict) -> list:
             padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
                 ft.Text(ip.get('iface',''), size=12, weight=ft.FontWeight.W_600, color=ACCENT),
-                ft.Text(ip.get('ip','N/A'), size=12, color=ft.colors.WHITE),
+                ft.Text(ip.get('ip','N/A'), size=12, color="#FFFFFF"),
                 ft.Container(expand=True),
                 ft.Text(f"/{ip.get('prefix','N/A')}  {ip.get('origin','')}", size=10, color=GRAY),
             ], spacing=12),
@@ -88,7 +88,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column(
-            [ft.Text('📡 IP配置', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE)] + ip_items,
+            [ft.Text('📡 IP配置', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] + ip_items,
             spacing=4,
         ),
     ))
@@ -97,7 +97,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column([
-            ft.Text('🔗 网络连接', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            ft.Text('🔗 网络连接', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
             ft.Divider(height=12, color=CARD_BG),
             _info_row('默认网关', data.get('gateway', 'N/A')),
             _info_row('DNS服务器', data.get('dns', 'N/A')),
@@ -124,7 +124,7 @@ def build_page(data: dict) -> list:
         cards.append(ft.Container(
             padding=16, border_radius=16, bgcolor=CARD_BG,
             content=ft.Column(
-                [ft.Text('📁 共享文件夹', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE)] + share_items,
+                [ft.Text('📁 共享文件夹', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] + share_items,
                 spacing=4,
             ),
         ))
@@ -137,6 +137,6 @@ def _info_row(label: str, value: str) -> ft.Container:
         padding=ft.Padding.only(top=5, bottom=5),
         content=ft.Row([
             ft.Text(label, size=12, color=GRAY, width=90),
-            ft.Text(str(value), size=12, color=ft.colors.WHITE),
+            ft.Text(str(value), size=12, color="#FFFFFF"),
         ], spacing=8),
     )

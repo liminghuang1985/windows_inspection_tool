@@ -26,7 +26,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column(
-            [ft.Text('🛡️ 防火墙状态', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE)] + fw_items,
+            [ft.Text('🛡️ 防火墙状态', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] + fw_items,
             spacing=4,
         ),
     ))
@@ -36,7 +36,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column([
-            ft.Text('🖥️ 远程桌面(RDP)', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            ft.Text('🖥️ 远程桌面(RDP)', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
             ft.Divider(height=12, color=CARD_BG),
             _info_row('RDP状态', data.get('rdp_enabled', 'N/A'), badge=data.get('rdp_enabled',''), badge_color=rdp_color),
             _info_row('NLA保护', data.get('rdp_nla', 'N/A')),
@@ -49,7 +49,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column([
-            ft.Text('🔐 BitLocker 加密', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            ft.Text('🔐 BitLocker 加密', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
             ft.Divider(height=12, color=CARD_BG),
             _info_row('状态', '已启用' if bl_on else '未启用/不可用', badge='已启用' if bl_on else '未启用', badge_color=GREEN if bl_on else GRAY),
         ], spacing=0),
@@ -61,7 +61,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column([
-            ft.Text('🦠 Windows Defender', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            ft.Text('🦠 Windows Defender', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
             ft.Divider(height=12, color=CARD_BG),
             _info_row('防病毒', def_status, badge=def_status, badge_color=def_color),
             _info_row('实时保护', data.get('defender_rtp', 'N/A')),
@@ -74,7 +74,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column([
-            ft.Text('⏰ 时间同步', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            ft.Text('⏰ 时间同步', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
             ft.Divider(height=12, color=CARD_BG),
             _info_row('服务状态', data.get('time_sync', 'N/A')),
             _info_row('时间源', data.get('time_source', 'N/A')),
@@ -89,7 +89,7 @@ def build_page(data: dict) -> list:
         cards.append(ft.Container(
             padding=16, border_radius=16, bgcolor=CARD_BG,
             content=ft.Column(
-                [ft.Text('🔑 密码策略', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+                [ft.Text('🔑 密码策略', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                  ft.Divider(height=12, color=CARD_BG)] + pw_items,
                 spacing=0,
             ),
@@ -103,13 +103,13 @@ def build_page(data: dict) -> list:
         user_items.append(ft.Container(
             padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
             content=ft.Row([
-                ft.Text(u.get('name',''), size=13, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+                ft.Text(u.get('name',''), size=13, weight=ft.FontWeight.W_600, color="#FFFFFF"),
                 ft.Container(expand=True),
                 ft.Text(f"最后登录: {u.get('lastlogon','N/A')}", size=10, color=GRAY),
                 ft.Container(
                     padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
                     border_radius=6, bgcolor=en_color,
-                    content=ft.Text('已启用' if en else '已禁用', size=10, color=ft.colors.WHITE),
+                    content=ft.Text('已启用' if en else '已禁用', size=10, color="#FFFFFF"),
                 ),
             ], spacing=8),
         ))
@@ -117,7 +117,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column(
-            [ft.Text(f'👤 本地用户 ({len(user_items)})', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE)] + user_items,
+            [ft.Text(f'👤 本地用户 ({len(user_items)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] + user_items,
             spacing=4,
         ),
     ))
@@ -126,9 +126,9 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column([
-            ft.Text('👥 管理员组成员', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE),
+            ft.Text('👥 管理员组成员', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF"),
             ft.Divider(height=12, color=CARD_BG),
-            ft.Text(data.get('admin_members', 'N/A'), size=12, color=ft.colors.WHITE),
+            ft.Text(data.get('admin_members', 'N/A'), size=12, color="#FFFFFF"),
         ], spacing=0),
     ))
 
@@ -141,12 +141,12 @@ def _fw_row(name: str, status: str) -> ft.Container:
     return ft.Container(
         padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=4),
         content=ft.Row([
-            ft.Text(name, size=12, color=ft.colors.WHITE),
+            ft.Text(name, size=12, color="#FFFFFF"),
             ft.Container(expand=True),
             ft.Container(
                 padding=ft.Padding.only(left=12, right=12, top=3, bottom=3),
                 border_radius=6, bgcolor=color,
-                content=ft.Text(status, size=11, weight=ft.FontWeight.W_700, color=ft.colors.WHITE),
+                content=ft.Text(status, size=11, weight=ft.FontWeight.W_700, color="#FFFFFF"),
             ),
         ], spacing=8),
     )
@@ -157,12 +157,12 @@ def _info_row(label: str, value: str, badge: str = None, badge_color: str = None
         padding=ft.Padding.only(top=5, bottom=5),
         content=ft.Row([
             ft.Text(label, size=12, color=GRAY, width=100),
-            ft.Text(str(value), size=12, color=ft.colors.WHITE),
+            ft.Text(str(value), size=12, color="#FFFFFF"),
             ft.Container(expand=True),
             ft.Container(
                 padding=ft.Padding.only(left=8, right=8, top=2, bottom=2),
                 border_radius=6, bgcolor=badge_color or GRAY,
-                content=ft.Text(badge or '', size=10, color=ft.colors.WHITE),
+                content=ft.Text(badge or '', size=10, color="#FFFFFF"),
             ) if badge else ft.Container(),
         ], spacing=8),
     )

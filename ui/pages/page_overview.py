@@ -40,7 +40,7 @@ def build_page(data: dict) -> list:
         content=ft.Column([
             ft.Row([
                 ft.Column([
-                    ft.Text(data.get('hostname', 'N/A'), size=24, weight=ft.FontWeight.W_700, color=ft.colors.WHITE),
+                    ft.Text(data.get('hostname', 'N/A'), size=24, weight=ft.FontWeight.W_700, color="#FFFFFF"),
                     ft.Text(data.get('os', 'N/A'), size=13, color=GRAY),
                 ], spacing=4),
                 ft.Container(expand=True),
@@ -48,16 +48,16 @@ def build_page(data: dict) -> list:
                     padding=ft.Padding.only(left=16, right=16, top=8, bottom=8),
                     border_radius=12,
                     bgcolor=risk_color,
-                    content=ft.Text(f'⚠️ {risk_level}风险', size=16, weight=ft.FontWeight.W_700, color=ft.colors.WHITE),
+                    content=ft.Text(f'⚠️ {risk_level}风险', size=16, weight=ft.FontWeight.W_700, color="#FFFFFF"),
                 ),
             ]),
             ft.Divider(height=20, color=CARD_BG),
             ft.Row([
-                ft.Column([ft.Text('运行时间', size=11, color=GRAY), ft.Text(data.get('uptime', 'N/A'), size=13, color=ft.colors.WHITE)], spacing=2),
+                ft.Column([ft.Text('运行时间', size=11, color=GRAY), ft.Text(data.get('uptime', 'N/A'), size=13, color="#FFFFFF")], spacing=2),
                 ft.Container(expand=True),
-                ft.Column([ft.Text('当前用户', size=11, color=GRAY), ft.Text(data.get('user', 'N/A'), size=13, color=ft.colors.WHITE)], spacing=2),
+                ft.Column([ft.Text('当前用户', size=11, color=GRAY), ft.Text(data.get('user', 'N/A'), size=13, color="#FFFFFF")], spacing=2),
                 ft.Container(expand=True),
-                ft.Column([ft.Text('许可证', size=11, color=GRAY), ft.Text(f"{data.get('license_status','N/A')} ({data.get('license_type','N/A')})", size=13, color=ft.colors.WHITE)], spacing=2),
+                ft.Column([ft.Text('许可证', size=11, color=GRAY), ft.Text(f"{data.get('license_status','N/A')} ({data.get('license_type','N/A')})", size=13, color="#FFFFFF")], spacing=2),
             ]),
         ], spacing=0),
         padding=20, border_radius=16, bgcolor=CARD_BG,
@@ -106,7 +106,7 @@ def build_page(data: dict) -> list:
         disk_items.append(ft.Container(
             padding=8, border_radius=8, bgcolor="#12122a", margin=ft.Margin.only(bottom=6),
             content=ft.Row([
-                ft.Column([ft.Text(disk.get('drive',''), size=14, weight=ft.FontWeight.W_600, color=ft.colors.WHITE)], spacing=0),
+                ft.Column([ft.Text(disk.get('drive',''), size=14, weight=ft.FontWeight.W_600, color="#FFFFFF")], spacing=0),
                 ft.Column([ft.Text(disk.get('label','N/A'), size=10, color=GRAY), ft.Text(f"{disk.get('free','N/A')}GB 可用", size=10, color=GRAY)], spacing=0, tight=True),
                 ft.Container(expand=True),
                 ft.Text(f"{pct:.1f}%", size=14, weight=ft.FontWeight.W_700, color=color),
@@ -115,7 +115,7 @@ def build_page(data: dict) -> list:
 
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
-        content=ft.Column([ft.Text('💾 磁盘', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE)] + disk_items, spacing=4),
+        content=ft.Column([ft.Text('💾 磁盘', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] + disk_items, spacing=4),
     ))
 
     # 风险告警列表
@@ -128,12 +128,12 @@ def build_page(data: dict) -> list:
                 ft.Container(
                     width=8, height=8, border_radius=4, bgcolor=color,
                 ),
-                ft.Text(desc, size=12, color=ft.colors.WHITE),
+                ft.Text(desc, size=12, color="#FFFFFF"),
                 ft.Container(expand=True),
                 ft.Container(
                     padding=ft.Padding.only(left=8, right=8, top=3, bottom=3),
                     border_radius=6, bgcolor=color,
-                    content=ft.Text(level, size=10, weight=ft.FontWeight.W_700, color=ft.colors.WHITE),
+                    content=ft.Text(level, size=10, weight=ft.FontWeight.W_700, color="#FFFFFF"),
                 ),
             ], spacing=8),
         ))
@@ -141,7 +141,7 @@ def build_page(data: dict) -> list:
     cards.append(ft.Container(
         padding=16, border_radius=16, bgcolor=CARD_BG,
         content=ft.Column(
-            [ft.Text(f'🚨 风险告警 ({len(risks)})', size=15, weight=ft.FontWeight.W_600, color=ft.colors.WHITE)] +
+            [ft.Text(f'🚨 风险告警 ({len(risks)})', size=15, weight=ft.FontWeight.W_600, color="#FFFFFF")] +
             (risk_items if risk_items else [ft.Text('未发现风险项 ✓', size=12, color=GREEN)]),
             spacing=4,
         ),
