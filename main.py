@@ -15,6 +15,8 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from inspector.collector import collect_all
 from inspector.reporter import generate_html, save_html_report
 from ui.pages import page_overview, page_hardware, page_security, page_processes
+from ui.theme import load_theme
+from ui.dialogs.settings_dialog import SettingsDialog
 
 # ==================== 主题配置 ====================
 DARK_BG  = "#0A0F1A"
@@ -62,7 +64,21 @@ class InspectionApp:
         self.tab_row = ft.Container(
             padding=ft.Padding.only(left=16, right=16, top=8, bottom=8),
             bgcolor=DARK_BG,
-            content=ft.Row(self._make_tab_buttons(), spacing=0, alignment=ft.MainAxisAlignment.SPACE_EVENLY, vertical_alignment=ft.CrossAxisAlignment.CENTER),
+            content=ft.Row([
+                ft.Container(
+                    expand=True,
+                    content=ft.Row(self._make_tab_buttons(), spacing=0, alignment=ft.MainAxisAlignment.SPACE_EVENLY, vertical_alignment=ft.CrossAxisAlignment.CENTER),
+                ),
+                ft.Container(
+                    width=1, bgcolor="#2A3A4A", margin=ft.Margin.only(left=8, right=8),
+                ),
+                ft.Container(
+                    padding=ft.Padding.only(left=10, right=10, top=8, bottom=8),
+                    on_click=self._open_settings,
+                    content=ft.Text("⚙️", size=18),
+                    tooltip="主题设置",
+                ),
+            ], spacing=0, vertical_alignment=ft.CrossAxisAlignment.CENTER),
         )
 
         # 页面内容区
@@ -124,11 +140,29 @@ class InspectionApp:
         self._render_page()
         self.page.update()
 
+    def _open_settings(self, e):
+        """打开设置弹窗"""
+        def on_theme_changed(new_theme):
+            self._refresh_theme(new_theme)
+        dlg = SettingsDialog(self.page, on_theme_changed=on_theme_changed)
+        dlg.show()
+
+    def _refresh_theme(self, theme: dict):
+        """刷新主题色（不重新巡检）"""
+        self._update_colors(theme)
+        self._render_page()
+        self.page.update()
+
+    def _update_colors(self, theme: dict):
+        """更新UI颜色"""
+        pass  # 主要颜色变化通过theme参数传入各page
+
     def _render_page(self):
         """渲染当前页面"""
         if self.loading or self.data is None:
             return
 
+        theme = load_theme()
         page_map = {
             0: page_overview,
             1: page_hardware,
@@ -136,7 +170,7 @@ class InspectionApp:
             3: page_processes,
         }
         page_fn = page_map.get(self.tab_index, page_overview)
-        widgets = page_fn.build_page(self.data)
+        widgets = page_fn.build_page(self.data, theme)
 
         self.content_area.content = ft.ListView(
             controls=widgets,
